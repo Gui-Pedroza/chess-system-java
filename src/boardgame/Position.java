@@ -22,7 +22,7 @@ public class Position {
 		this.row = row;
 	}
 
-	public int getColum() {
+	public int getColumn() {
 		return column;
 	}
 
@@ -33,6 +33,10 @@ public class Position {
 	@Override
 	public String toString() {
 		return row + ", " + column;
+	}
+	
+	public void setValues(int row, int column) {
+		
 	}
 	
 	
