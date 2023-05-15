@@ -1,8 +1,10 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Piece;
 import chess.pieces.Rook;
 import chess.pieces.King;
+import boardgame.Position;
 
 public class ChessMatch {
 
@@ -21,6 +23,21 @@ public class ChessMatch {
 			}
 		}
 		return mat;
+	}
+	
+	public ChessPiece performChessMove(ChessPosition origin, ChessPosition destiny) {		
+		Position positionOrigin = origin.toPosition();
+		Position positionDestiny = destiny.toPosition();
+		validateOriginPosition(positionOrigin);
+		Piece capturedPiece = makeMove(positionOrigin, positionDestiny);
+		return (ChessPiece) capturedPiece;		
+	}
+	
+	private Piece makeMove(Position origin, Position destiny) {
+		Piece p = board.removePiece(origin);
+		Piece capturedPiece = board.removePiece(destiny);
+		board.placePiece(p, destiny);
+		return capturedPiece;
 	}
 
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
@@ -42,5 +59,11 @@ public class ChessMatch {
 		placeNewPiece('e', 8, new Rook(board, Color.BLACK));
 		placeNewPiece('d', 8, new King(board, Color.BLACK));
 
+	}
+	
+	private void validateOriginPosition(Position position) {
+		if (!board.isThereAPiece(position)) {
+			throw new ChessException("There is no piece in origin position");
+		}
 	}
 }
