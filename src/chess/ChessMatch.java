@@ -65,5 +65,8 @@ public class ChessMatch {
 		if (!board.isThereAPiece(position)) {
 			throw new ChessException("There is no piece in origin position, press enter to continue");
 		}
+		if (!board.piece(position).isThereAnyPossibleMove()) {
+			throw new ChessException("There no possible moves for the chosen piece, press enter to continue");
+		}
 	}
 }
