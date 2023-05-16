@@ -63,7 +63,7 @@ public class ChessMatch {
 	
 	private void validateOriginPosition(Position position) {
 		if (!board.isThereAPiece(position)) {
-			throw new ChessException("There is no piece in origin position");
+			throw new ChessException("There is no piece in origin position, press enter to continue");
 		}
 	}
 }

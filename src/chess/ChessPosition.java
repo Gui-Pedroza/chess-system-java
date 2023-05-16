@@ -11,7 +11,7 @@ public class ChessPosition {
 
 	public ChessPosition(char column, int row) {		
 		if (column < 'a' || column > 'h' || row < 1 || row > 8) {
-			throw new ChessException("Invalid position");
+			throw new ChessException("Invalid position, press enter to continue...");
 		}
 		this.column = column;
 		this.row = row;
