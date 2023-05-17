@@ -29,6 +29,7 @@ public class ChessMatch {
 		Position positionOrigin = origin.toPosition();
 		Position positionDestiny = destiny.toPosition();
 		validateOriginPosition(positionOrigin);
+		validateDestinyPosition(positionOrigin, positionDestiny);
 		Piece capturedPiece = makeMove(positionOrigin, positionDestiny);
 		return (ChessPiece) capturedPiece;		
 	}
@@ -68,5 +69,11 @@ public class ChessMatch {
 		if (!board.piece(position).isThereAnyPossibleMove()) {
 			throw new ChessException("There no possible moves for the chosen piece, press enter to continue");
 		}
+	}
+	private void validateDestinyPosition(Position positionOrigin, Position positionDestiny) {
+		if (!board.piece(positionOrigin).possibleMove(positionDestiny)) {
+			throw new ChessException("Invalid move, press enter to continue");
+		}
+		
 	}
 }
