@@ -9,10 +9,22 @@ import boardgame.Position;
 public class ChessMatch {
 
 	private Board board;
+	private int turn;
+	private Color currentPlayer;
 
 	public ChessMatch() {
 		board = new Board(8, 8);
+		turn = 1;
+		currentPlayer = Color.WHITE;
 		initialSetup();
+	}
+	
+	public int getTurn() {
+		return turn;
+	}
+	
+	public Color getCurrentPlayer() {
+		return currentPlayer;
 	}
 
 	public ChessPiece[][] getPieces() {
@@ -37,6 +49,7 @@ public class ChessMatch {
 		validateOriginPosition(positionOrigin);
 		validateDestinyPosition(positionOrigin, positionDestiny);
 		Piece capturedPiece = makeMove(positionOrigin, positionDestiny);
+		nextTurn();
 		return (ChessPiece) capturedPiece;		
 	}
 	
@@ -77,11 +90,19 @@ public class ChessMatch {
 		if (!board.piece(position).isThereAnyPossibleMove()) {
 			throw new ChessException("There no possible moves for the chosen piece, press enter to continue");
 		}
+		if (((ChessPiece) board.piece(position)).getColor() != currentPlayer) {
+			throw new ChessException("Cannot move opponent piece, press enter and select one of your own piece");
+		}
 	}
 	private void validateDestinyPosition(Position positionOrigin, Position positionDestiny) {
 		if (!board.piece(positionOrigin).possibleMove(positionDestiny)) {
 			throw new ChessException("Invalid move, press enter to continue");
 		}
 		
+	}
+	
+	private void nextTurn()	{
+		turn++;
+		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 }
