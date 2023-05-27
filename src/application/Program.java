@@ -33,11 +33,12 @@ public class Program {
 				System.out.println();
 				System.out.print("Destiny move: ");
 				ChessPosition destiny = UI.readChessPosition(sc);
-
+				
 				ChessPiece capturedPiece = chessMatch.performChessMove(origin, destiny);
 				if (capturedPiece != null) {
 					captured.add(capturedPiece);
 				}
+				System.out.println("aqui");
 			} catch (ChessException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
