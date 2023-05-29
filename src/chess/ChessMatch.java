@@ -93,6 +93,21 @@ public class ChessMatch {
 			piecesOnBoard.remove(capturedPiece);
 			capturedPieces.add(capturedPiece);
 		}
+		// special move castling
+		if (p instanceof King && destiny.getColumn() == origin.getColumn() + 2) {
+			Position originT = new Position(origin.getRow(), origin.getColumn() + 3);
+			Position destinyT = new Position(origin.getRow(), origin.getColumn() + 1);
+			ChessPiece rook = (ChessPiece)board.removePiece(originT);
+			board.placePiece(rook, destinyT);
+			rook.increaseMoveCount();
+		}
+		if (p instanceof King && destiny.getColumn() == origin.getColumn() - 2) {
+			Position originT = new Position(origin.getRow(), origin.getColumn() - 4);
+			Position destinyT = new Position(origin.getRow(), origin.getColumn() - 1);
+			ChessPiece rook = (ChessPiece)board.removePiece(originT);
+			board.placePiece(rook, destinyT);
+			rook.increaseMoveCount();
+		}
 		return capturedPiece;
 	}
 
@@ -104,6 +119,22 @@ public class ChessMatch {
 			board.placePiece(capturedPiece, destiny);
 			capturedPieces.remove(capturedPiece);
 			piecesOnBoard.add(capturedPiece);
+		}
+		// undo kingside castling
+		if (p instanceof King && destiny.getColumn() == origin.getColumn() + 2) {
+			Position originT = new Position(origin.getRow(), origin.getColumn() + 3);
+			Position destinyT = new Position(origin.getRow(), origin.getColumn() + 1);
+			ChessPiece rook = (ChessPiece)board.removePiece(destinyT);
+			board.placePiece(rook, originT);
+			rook.decreaseMoveCount();
+		}
+		// undo queenside castling
+		if (p instanceof King && destiny.getColumn() == origin.getColumn() - 2) {
+			Position originT = new Position(origin.getRow(), origin.getColumn() - 4);
+			Position destinyT = new Position(origin.getRow(), origin.getColumn() - 1);
+			ChessPiece rook = (ChessPiece)board.removePiece(destinyT);
+			board.placePiece(rook, originT);
+			rook.decreaseMoveCount();
 		}
 	}
 
@@ -168,7 +199,7 @@ public class ChessMatch {
 		placeNewPiece('b', 1, new Knight(board, Color.WHITE));
 		placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
 		placeNewPiece('d', 1, new Queen(board, Color.WHITE));
-		placeNewPiece('e', 1, new King(board, Color.WHITE));
+		placeNewPiece('e', 1, new King(board, Color.WHITE, this));
 		placeNewPiece('h', 1, new Rook(board, Color.WHITE));
 		placeNewPiece('g', 1, new Knight(board, Color.WHITE));
 		placeNewPiece('a', 2, new Pawn(board, Color.WHITE));
@@ -183,7 +214,7 @@ public class ChessMatch {
 		placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
 		
 		
-		placeNewPiece('e', 8, new King(board, Color.BLACK));
+		placeNewPiece('e', 8, new King(board, Color.BLACK, this));
 		placeNewPiece('h', 8, new Rook(board, Color.BLACK));
 		placeNewPiece('b', 8, new Knight(board, Color.BLACK));
 		placeNewPiece('f', 8, new Bishop(board, Color.BLACK));

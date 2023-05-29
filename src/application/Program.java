@@ -37,8 +37,7 @@ public class Program {
 				ChessPiece capturedPiece = chessMatch.performChessMove(origin, destiny);
 				if (capturedPiece != null) {
 					captured.add(capturedPiece);
-				}
-				System.out.println("aqui");
+				}				
 			} catch (ChessException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
