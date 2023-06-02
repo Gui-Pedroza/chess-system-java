@@ -65,7 +65,8 @@ public class UI {
 		for (int i = 0; i < 8; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < 8; j++) {
-				printPiece(pieces[i][j], possibleMoves[i][j]);				
+				printPiece(pieces[i][j], possibleMoves[i][j]);
+				
 			}
 			System.out.println();
 		}
@@ -106,6 +107,10 @@ public class UI {
             }
         }
         System.out.print(" ");
+	}
+	
+	private static void printCheckTrace(ChessPiece piece, boolean[][] kingLineOfSight) {
+		
 	}
 	
 	private static void printCapturedPieces(List<ChessPiece> captured) {
