@@ -73,6 +73,17 @@ public class ChessMatch {
 		validateOriginPosition(position);
 		return board.piece(position).possibleMoves();
 	}
+	
+	public boolean[][] kingCheckTrace(Position kingPosition){
+		// ISSO AQUI NAO TÁ IMPLEMENTADO NEM CORRETO:
+		List<Piece> opponentPieces = piecesOnBoard.stream().filter(p -> ((ChessPiece) p).getColor() == opponent(color)).collect(Collectors.toList());
+		for (Piece piece : opponentPieces) {
+			boolean[][] mat = piece.possibleMoves();
+			if (mat[kingPosition.getRow()][kingPosition.getColumn()]) {
+				return mat;
+			}
+		}
+	}
 
 	public ChessPiece performChessMove(ChessPosition origin, ChessPosition destiny) {
 		Position positionOrigin = origin.toPosition();
@@ -238,13 +249,16 @@ public class ChessMatch {
 		}
 		return null;
 	}
+	
+	public Position kingPosition(Color color) {
+		return king(color).getChessPosition().toPosition();
+	}
 
-	private boolean testCheck(Color color) {
-		Position kingPosition = king(color).getChessPosition().toPosition();
+	private boolean testCheck(Color color) {		
 		List<Piece> opponentPieces = piecesOnBoard.stream().filter(p -> ((ChessPiece) p).getColor() == opponent(color)).collect(Collectors.toList());
 		for (Piece piece : opponentPieces) {
 			boolean[][] mat = piece.possibleMoves();
-			if (mat[kingPosition.getRow()][kingPosition.getColumn()]) {
+			if (mat[kingPosition(color).getRow()][kingPosition(color).getColumn()]) {
 				return true;
 			}
 		}

@@ -108,10 +108,7 @@ public class UI {
         }
         System.out.print(" ");
 	}
-	
-	private static void printCheckTrace(ChessPiece piece, boolean[][] kingLineOfSight) {
 		
-	}
 	
 	private static void printCapturedPieces(List<ChessPiece> captured) {
 		List<ChessPiece> white = captured.stream().filter(p -> p.getColor()== Color.WHITE).toList();
