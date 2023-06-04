@@ -74,7 +74,8 @@ public class ChessMatch {
 		return board.piece(position).possibleMoves();
 	}
 	
-	public boolean[][] kingCheckTrace(Position kingPosition){
+	public boolean[][] kingCheckTrace(Position kingPosition, Color color){
+		// TODO
 		// ISSO AQUI NAO TÁ IMPLEMENTADO NEM CORRETO:
 		List<Piece> opponentPieces = piecesOnBoard.stream().filter(p -> ((ChessPiece) p).getColor() == opponent(color)).collect(Collectors.toList());
 		for (Piece piece : opponentPieces) {
@@ -83,6 +84,7 @@ public class ChessMatch {
 				return mat;
 			}
 		}
+		return null;
 	}
 
 	public ChessPiece performChessMove(ChessPosition origin, ChessPosition destiny) {
@@ -236,7 +238,7 @@ public class ChessMatch {
 		piecesOnBoard.add(piece);
 	}
 
-	private Color opponent(Color color) {
+	public Color opponent(Color color) {
 		return (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 

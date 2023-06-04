@@ -49,7 +49,7 @@ public class UI {
 		}
 		
 	}
-
+	// print board only the pieces
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < 8; i++) {
 			System.out.print((8 - i) + " ");
@@ -60,12 +60,24 @@ public class UI {
 		}
 		System.out.println("  a b c d e f g h");
 	}
-	
+	// print board with pieces and possible moves track
 	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
 		for (int i = 0; i < 8; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < 8; j++) {
 				printPiece(pieces[i][j], possibleMoves[i][j]);
+				
+			}
+			System.out.println();
+		}
+		System.out.println("  a b c d e f g h");
+	}
+	// print board with pieces and possible moves track
+	public static void printBoardWithCheckTrace(ChessPiece[][] pieces, boolean[][] kingCheckTrace) {
+		for (int i = 0; i < 8; i++) {
+			System.out.print((8 - i) + " ");
+			for (int j = 0; j < 8; j++) {
+				printPiece(pieces[i][j], kingCheckTrace[i][j]);
 				
 			}
 			System.out.println();
@@ -83,7 +95,9 @@ public class UI {
 			System.out.println("Waiting player: " + match.getCurrentPlayer());
 			if (match.getCheck()) {
 				System.out.println("CHECK!");
+				// TODO: colocar dentro deste if o printBoard com o trace do rei
 			}
+		
 		} else {
 			System.out.println("CHECKMATE!");
 			System.out.println("Winner: " + match.getCurrentPlayer());

@@ -38,8 +38,8 @@ public class Program {
 				
 				// tentando printar o tracejado do cheque do rei
 				Color currentPlayer = chessMatch.getCurrentPlayer();
-				Position kingPosition = chessMatch.kingPosition(currentPlayer);
-				boolean [][] kingCheckTrace = chessMatch.kingCheckTrace(kingPosition);
+				Position kingPosition = chessMatch.kingPosition(chessMatch.opponent(currentPlayer));
+				boolean [][] kingCheckTrace = chessMatch.kingCheckTrace(kingPosition, chessMatch.opponent(currentPlayer));
 				if (chessMatch.getCheck()) {
 					
 				}
