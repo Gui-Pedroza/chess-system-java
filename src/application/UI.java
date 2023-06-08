@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collector;
 
+import boardgame.Position;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
@@ -95,7 +95,10 @@ public class UI {
 			System.out.println("Waiting player: " + match.getCurrentPlayer());
 			if (match.getCheck()) {
 				System.out.println("CHECK!");
-				// TODO: colocar dentro deste if o printBoard com o trace do rei
+				Color currentPlayer = match.getCurrentPlayer();
+				Position kingPosition = match.kingPosition(match.getCurrentPlayer());
+				boolean [][] kingCheckTrace = match.kingCheckTrace(kingPosition, match.opponent(currentPlayer));
+				UI.printBoardWithCheckTrace(match.getPieces(), kingCheckTrace);
 			}
 		
 		} else {

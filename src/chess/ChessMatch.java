@@ -77,10 +77,11 @@ public class ChessMatch {
 	public boolean[][] kingCheckTrace(Position kingPosition, Color color){
 		// TODO
 		// ISSO AQUI NAO TÁ IMPLEMENTADO NEM CORRETO:
-		List<Piece> opponentPieces = piecesOnBoard.stream().filter(p -> ((ChessPiece) p).getColor() == opponent(color)).collect(Collectors.toList());
+		List<Piece> opponentPieces = piecesOnBoard.stream().filter(p -> ((ChessPiece) p).getColor() == color).collect(Collectors.toList());
 		for (Piece piece : opponentPieces) {
-			boolean[][] mat = piece.possibleMoves();
+			boolean[][] mat = piece.possibleMoves();			
 			if (mat[kingPosition.getRow()][kingPosition.getColumn()]) {
+				// Position oppositePiecePosition = ((ChessPiece) piece).getPosition();
 				return mat;
 			}
 		}

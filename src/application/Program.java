@@ -5,12 +5,10 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import boardgame.Position;
 import chess.ChessException;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
-import chess.Color;
 
 public class Program {
 
@@ -35,15 +33,7 @@ public class Program {
 				System.out.println();
 				System.out.print("Destiny move: ");
 				ChessPosition destiny = UI.readChessPosition(sc);
-				
-				// tentando printar o tracejado do cheque do rei
-				Color currentPlayer = chessMatch.getCurrentPlayer();
-				Position kingPosition = chessMatch.kingPosition(chessMatch.opponent(currentPlayer));
-				boolean [][] kingCheckTrace = chessMatch.kingCheckTrace(kingPosition, chessMatch.opponent(currentPlayer));
-				if (chessMatch.getCheck()) {
-					
-				}
-
+			
 				ChessPiece capturedPiece = chessMatch.performChessMove(origin, destiny);
 				if (capturedPiece != null) {
 					captured.add(capturedPiece);
